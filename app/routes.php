@@ -224,3 +224,5 @@ Route::get('/config', function(){
 });
 
 Route::get('/insertarAlumnos', 'AlumnoController@insertarAlumnos');
+
+Route::get('/verAsistencia', 'AsistenciaController@showHistorica');

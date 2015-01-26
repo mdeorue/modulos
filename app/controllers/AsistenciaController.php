@@ -108,7 +108,7 @@ class AsistenciaController extends BaseController {
 			$message->to($alumno->email, $alumno->alumno)->subject('Recuerda no ausentarte a la tutoría académica');
 		});
 	}
-
+	
 	public function widgetHistorica(){
 		$resultado['resultado'] = false;
 		$validador = Validator::make(Input::all(), array(
@@ -118,7 +118,7 @@ class AsistenciaController extends BaseController {
 			$asistencias = Asistencia::where('modulo', '=', Input::get('modulo'))->orderBy('fecha', 'desc')->get();
 			if($asistencias->count()){
 				$resultado['resultado'] = true;
-				$resultado['widget'] = View::make('asistencia.historica', array('asistencias' => $asistencias, 'modulo' => Input::get('modulo')))->render();
+				$resultado['widget'] = View::make('asistencia.historica', ['asistencias' => $asistencias, 'modulo' => Input::get('modulo')])->render();
 			}else{
 				$resultado['mensaje'] = 'El módulo no posee asistencia inscrita.';
 			}

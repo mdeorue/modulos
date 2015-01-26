@@ -24,7 +24,11 @@
 					<tr>
 						<td>{{ $asistencia->fecha }}</td>
 						<td>{{ $asistencia->alumno()->first()->matricula }} - {{ $asistencia->alumno()->first()->alumno }}</td>
-						<td>{{ $asistencia->hora_asis }}/{{ $asistencia->hora_clase }} - {{ number_format(($asistencia->hora_asis*100/$asistencia->hora_clase), 0) }}%</td>
+						@if($asistencia->hora_clase == 0)
+							<td>{{ $asistencia->hora_asis }}/{{ $asistencia->hora_clase }} - 0%</td>
+						@else
+							<td>{{ $asistencia->hora_asis }}/{{ $asistencia->hora_clase }} - {{ number_format(($asistencia->hora_asis*100/$asistencia->hora_clase), 0) }}%</td>
+						@endif
 						@if(Auth::user()->categoria == 1)
 							<td><a href="#" class="glyphicon glyphicon-pencil edit-asis" title="Editar Asistencia" data-asis="{{ $asistencia->id }}"></a></td>
 						@endif
