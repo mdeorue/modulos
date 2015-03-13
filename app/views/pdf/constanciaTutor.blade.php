@@ -27,7 +27,11 @@
 					<p class="indent">Sindy Alicia González Reyes, Trabajador Social, 
 						Encargada del Programa de Apoyo a la Adaptación Universitaria (PAAU), 
 						deja constancia que el/la Sr/a. {{ $profesor->usuario}}, matrícula 
-						{{ $profesor->rut }} de la carrera {{ $profesor->carrera()->first()->carrera }}, se desempeñó durante {{ $ciclo->semestre }} 
+						{{ $profesor->rut }} 
+						@if($profesor->carrera != 0)
+						de la carrera {{ $profesor->carrera()->first()->carrera }}, 	
+						@endif
+						se desempeñó durante {{ $ciclo->semestre }} 
 						del año {{ $ciclo->ano }}  como tutor académico 
 						en el Programa de Apoyo a la Adaptación Universitaria (PAAU) 
 						dependiente de la Dirección Académica de Pregrado de la 

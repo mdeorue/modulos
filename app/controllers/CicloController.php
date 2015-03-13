@@ -13,10 +13,8 @@ class CicloController extends BaseController {
 
 		$cicloNuevo = new Ciclo;
 		$cicloNuevo->estado = 1;
-		$cicloNuevo->inicio = date('Y-m-d H:i:s');
 		$cicloNuevo->semestre = $this->getSemestreMes();
 		$cicloNuevo->ano = date('Y');
-		$cicloNuevo->final = null;
 		if($cicloNuevo->save()){
 			$resultado['resultado'] = true;
 			$resultado['mensaje'] = 'El ciclo fue creado correctamente.';

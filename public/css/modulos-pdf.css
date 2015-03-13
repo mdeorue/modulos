@@ -13,10 +13,20 @@ h1{
 
 p{
 	font-size: 1.4em;
-	line-height: 2.5em;
+	line-height: 1.5em;
 	text-align: justify;
+}
+
+li{
+	font-size: 1.2em;
 }
 
 .indent{
 	text-indent: 4em;
+}
+
+.pdf-table{
+	width: 100%;
+	margin-bottom: 10px;
+	font-size: 1.2em;
 }
