@@ -529,6 +529,7 @@ class ModuloController extends BaseController {
 					$profesor = $profesorFinal->first();
 					$horarioOcupado = Modulo::where('profesor', '=', $profesor->id)
 						->where('horario_dia', '=', Input::get('hDia'))
+						->where('ciclo', '=',$ciclo->id)
 						->where(function($query){
 							$query->where('horario_hora', '=', Input::get('hHora'))
 								->orWhere('horario_hora', '=', Input::get('hHoraFin'))
@@ -733,6 +734,7 @@ class ModuloController extends BaseController {
 	public function editar(){
 		$resultado['resultado'] = false;
 		$resultado['parte'] = 0;
+		$ciclo = Ciclo::orderBy('id', 'desc')->take(1)->get()->first();
 		$validador = Validator::make(Input::all(), array(
 			'mid' => 'required|exists:sb_modulo,id'));
 		if($validador->passes()){
@@ -762,6 +764,7 @@ class ModuloController extends BaseController {
 						$horarioOcupado = Modulo::where('profesor', '=', $profesor->id)
 							->where('horario_dia', '=', Input::get('hDia'))
 							->where('id', '<>', Input::get('mid'))
+							->where('ciclo', '=', $ciclo->id)
 							->where(function($query){
 								$query->where('horario_hora', '=', Input::get('hHora'))
 									->orWhere('horario_hora', '=', Input::get('hHoraFin'))
@@ -817,6 +820,7 @@ class ModuloController extends BaseController {
 					$horarioOcupado = Modulo::where('profesor', '=', $modulo->profesor)
 						->where('horario_dia', '=', Input::get('hDia'))
 						->where('id', '<>', $modulo->id)
+						->where('ciclo', '=', $ciclo->id)
 						->where(function($query){
 							$query->where('horario_hora', '=', Input::get('hHora'))
 								->orWhere('horario_hora', '=', Input::get('hHoraFin'))
