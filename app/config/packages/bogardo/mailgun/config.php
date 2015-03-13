@@ -9,7 +9,7 @@ return array(
 	 *
 	 */
 	'from' => array(
-		'address' => 'migueldeorue@gmail.com',
+		'address' => 'sindy.gonzalez@ufrontera.cl',
 		'name' => 'PAAU UFRO'
 	),
 
@@ -18,7 +18,7 @@ return array(
 	 * Global reply-to e-mail address
 	 *
 	 */
-	'reply_to' => 'migueldeorue@gmail.com',
+	'reply_to' => 'sindy.gonzalez@ufrontera.cl',
 
 
 	/**

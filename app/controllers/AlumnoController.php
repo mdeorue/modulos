@@ -174,7 +174,7 @@ class AlumnoController extends BaseController {
 									'matricula' 	=> 'required|unique:sb_alumno,matricula',
 									'cod_facult'	=> 'required|exists:sb_facultad,codigo',
 									'cod_carrer'	=> 'required|exists:sb_carrera,id',
-									'email'			=> 'required|email'));
+									'email'			=> 'required|email|unique:sb_alumno,email'));
 								if($validador->passes()){
 									if(isset($prioridades[$columna['participacion']])){
 										$prioridadCod = $prioridades[$columna['participacion']];
@@ -229,7 +229,7 @@ class AlumnoController extends BaseController {
 						if(count($columnas)){
 							foreach ($columnas as $key => $columna) {
 								$validador = Validator::make($columna, array(
-									'matricula' 	=> 'required|unique:sb_alumno,matricula',
+									'matricula' 	=> 'required|exists:sb_alumno,matricula',
 									'cod_asigna'	=> 'required|exists:sb_asignatura,codigo'));
 								if($validador->passes()){
 									$becaAsignatura = new becaAsignatura;
