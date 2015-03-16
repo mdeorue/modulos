@@ -236,13 +236,16 @@ class ModuloController extends BaseController {
 				$modulo = Modulo::find($input['modulo']);
 				$solicitudesAsignatura = Solicitud::join('sb_modulo', function($join) use ($modulo){
             			$join->on('sb_solicitud.modulo', '=', 'sb_modulo.id')
-                 			->where('sb_modulo.asignatura', '=', $modulo->asignatura);
+                 			->where('sb_modulo.asignatura', '=', $modulo->asignatura)
+                 			->where('sb_modulo.ciclo', '=', $modulo->ciclo);
         			})
 					->where('sb_solicitud.estado', '=', 1)
 					->where('sb_solicitud.matricula', '=', Input::get('matricula'))
 					->count();
 				if($solicitudesAsignatura == 0){
-					$solicitudesActivas = Solicitud::where('modulo', '=', $input['modulo'])->where('estado', '=', 1)->count();
+					$solicitudesActivas = Solicitud::where('modulo', '=', $input['modulo'])
+						->where('estado', '=', 1)
+						->count();
 					if($alumnoExiste){
 						$prioridadManual = Input::get('prioridad');
 						if($prioridadManual != 1){
