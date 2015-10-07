@@ -1,4 +1,4 @@
-var base_path = 'http://127.0.0.1/modulo/public';
+var base_path = 'http://146.83.204.188';
 
 $('#ins-mat-al').change(function(event) {
   event.preventDefault();
