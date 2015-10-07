@@ -304,13 +304,18 @@ class CicloController extends BaseController {
 					if($solicitudes->count()){
 						foreach ($solicitudes as $solicitud) {
 							$alumno = $solicitud->alumno()->first();
-							$horaAsistencia = Asistencia::where('modulo', '=', $modulo->id)->where('matricula', '=', $alumno->matricula)->where('fecha', '>=', $inicio)->where('fecha', '<=', $final)->sum('hora_asis');
-							$horaClase = Asistencia::where('modulo', '=', $modulo->id)->where('matricula', '=', $alumno->matricula)->where('fecha', '>=', $inicio)->where('fecha', '<=', $final)->sum('hora_clase');
+							$horaAsistencia = Asistencia::where('modulo', '=', $modulo->id)->where('matricula', '=', $alumno->matricula)->where('fecha', '>=', $inicio)->where('fecha', '<=', $fin)->sum('hora_asis');
+							$horaClase = Asistencia::where('modulo', '=', $modulo->id)->where('matricula', '=', $alumno->matricula)->where('fecha', '>=', $inicio)->where('fecha', '<=', $fin)->sum('hora_clase');
 							$fechas = Asistencia::select(DB::raw('MIN(DATE_FORMAT(fecha,"%d-%m-%Y")) AS inicial, MAX(DATE_FORMAT(fecha,"%d-%m-%Y")) AS final'))->where('modulo', '=', $modulo->id)->where('matricula', '=', $alumno->matricula)->where('fecha', '>=', $inicio)->where('fecha', '<=', $fin)->first();
 							if($solicitud->estado == 1){
 								$estado = 'Activo';
 							}else{
 								$estado = 'Eliminado';
+							}
+							if($horaClase == 0){
+								$porcentajeAsistencia = 0;
+							}else{
+								$porcentajeAsistencia = $horaAsistencia/$horaClase;
 							}
 							$array[] = array(
 								'alumno.matricula' 				=> $alumno->matricula,
@@ -326,7 +331,7 @@ class CicloController extends BaseController {
 								'modulo.tutor'					=> $modulo->profesor()->first()->usuario,
 								'modulo.numero_tutoria'			=> $modulo->modulo,
 								'alumno.asistencia'				=> $horaAsistencia,
-								'alumno.porcentaje_asistencia'	=> $horaAsistencia/$horaClase,
+								'alumno.porcentaje_asistencia'	=> $porcentajeAsistencia,
 								'alumno.fecha_inicio'			=> $fechas->inicial,
 								'alumno.fecha_final'			=> $fechas->final
 								);
